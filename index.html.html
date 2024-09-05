@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #82cde8;
+            margin: 0;
+        }
+
+        .calculator {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section label {
+            font-size: 16px;
+        }
+
+        .section input {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .result {
+            padding: 10px;
+            font-size: 24px;
+            text-align: center;
+            background-color: #222;
+            color: #fff;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .operators {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px;
+        }
+
+        .operators button {
+            padding: 10px;
+            font-size: 18px;
+            background-color: #20b2aa;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 16%;
+            transition: background-color 0.2s;
+        }
+
+        .operators button:hover {
+            background-color: #1e90ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="section">
+            <label for="firstNumber">Enter First Number:</label>
+            <input type="number" id="firstNumber" placeholder="First number">
+        </div>
+        
+        <div class="section">
+            <label for="secondNumber">Enter Second Number:</label>
+            <input type="number" id="secondNumber" placeholder="Second number">
+        </div>
+        
+        <div class="result" id="result">Result: 0</div>
+        
+        <div class="operators">
+            <button onclick="calculate('+')">+</button>
+            <button onclick="calculate('-')">-</button>
+            <button onclick="calculate('*')">*</button>
+            <button onclick="calculate('/')">/</button>
+            <button onclick="calculate('%')">%</button>
+        </div>
+    </div>
+
+    <script>
+        function calculate(operation) {
+            const firstNumber = parseFloat(document.getElementById('firstNumber').value);
+            const secondNumber = parseFloat(document.getElementById('secondNumber').value);
+            let result;
+
+            if (isNaN(firstNumber) || isNaN(secondNumber)) {
+                result = 'Please enter valid numbers';
+            } else {
+                switch (operation) {
+                    case '+':
+                        result = firstNumber + secondNumber;
+                        break;
+                    case '-':
+                        result = firstNumber - secondNumber;
+                        break;
+                    case '*':
+                        result = firstNumber * secondNumber;
+                        break;
+                    case '/':
+                        result = secondNumber !== 0 ? firstNumber / secondNumber : 'Cannot divide by zero';
+                        break;
+                    case '%':
+                        result = secondNumber !==0 ?  firstNumber % secondNumber : 'Cannot divide by zero';
+                        break;
+                    default:
+                        result = 'Unknown operation';
+                }
+            }
+
+            document.getElementById('result').textContent = 'Result: ' + result;
+        }
+    </script>
+</body>
+</html>
+
